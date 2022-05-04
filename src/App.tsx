@@ -12,7 +12,9 @@ import './styles/global.scss';
 
 import './styles/sidebar.scss';
 import './styles/content.scss';
+
 import { Content } from './components/Content';
+import { SideBar } from './components/SideBar';
 
 interface GenreResponseProps {
   id: number;
@@ -57,26 +59,13 @@ export function App() {
 
   function handleClickButton(id: number) {
     setSelectedGenreId(id);
+
+  console.log(id)
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <nav className="sidebar">
-        <span>Watch<p>Me</p></span>
-
-        <div className="buttons-container">
-          {genres.map(genre => (
-            <Button
-              key={String(genre.id)}
-              title={genre.title}
-              iconName={genre.name}
-              onClick={() => handleClickButton(genre.id)}
-              selected={selectedGenreId === genre.id}
-            />
-          ))}
-        </div>
-
-      </nav>
+      <SideBar genres={genres} selectedGenreId={selectedGenreId} handleClickButton={handleClickButton}/>
       <Content genre={selectedGenre} movies={movies} />
     </div>
   )
